@@ -1,7 +1,10 @@
 package server.programowanie.sieciowe;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,19 +46,19 @@ public class OptionsBookstore {
 
           switch(count){
               case 1:
-                    bookshop.add(OptionsBookstore.addClassicBook(str));
-                    classic.add(OptionsBookstore.addClassicBook(str));
+                    bookshop.add(OptionsBookstore.loadClassicBook(str));
+                    classic.add(OptionsBookstore.loadClassicBook(str));
                     break;
               case 2:
-                    bookshop.add(OptionsBookstore.addAudioBook(str));
-                    audio.add(OptionsBookstore.addAudioBook(str));
+                    bookshop.add(OptionsBookstore.loadAudioBook(str));
+                    audio.add(OptionsBookstore.loadAudioBook(str));
                     break;
               case 3:
-                    bookshop.add(OptionsBookstore.addEbook(str));
-                    ebook.add(OptionsBookstore.addEbook(str));
+                    bookshop.add(OptionsBookstore.loadEbook(str));
+                    ebook.add(OptionsBookstore.loadEbook(str));
                     break;
               default:
-                 System.out.println("ERROR!");
+                 System.out.println("LOADING");
                   break;           
           }
           
@@ -89,7 +92,7 @@ public class OptionsBookstore {
                 str+=o+"@";
         out.println(str);
         }
-        else if(text.startsWith("audio", 6)){
+        else if(text.startsWith("audiobook", 6)){
             for(Object o: audio)
                 str+=o+"@";
         out.println(str);
@@ -139,10 +142,28 @@ public class OptionsBookstore {
                 out.print(o+"@");
             out.println();
     }
+    public void addClassicBook(String text) throws FileNotFoundException, IOException{
+        String str=loadClassicBook(text).toString();
+        classic.add(loadClassicBook(text));
+        saveBookInFileTxt(str);
+        
+    }
+    
+    public void addEbook(String text) throws IOException{
+        String str=loadEbook(text).toString();
+        ebook.add(loadEbook(text));
+        saveBookInFileTxt(str);
+    }
+    
+    public void addAudioBook(String text) throws IOException{
+        String str=loadAudioBook(text).toString();
+        audio.add(loadAudioBook(text));
+        saveBookInFileTxt(str);
+    }
     /**
      * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu ClassicBook
      */
-    private static ClassicBook addClassicBook(String str){
+    private static ClassicBook loadClassicBook(String str){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Liczba stron:(.*) Waga:(.*)kg Oprawa:(.*)";
         ClassicBook book=null;
         int ISBN=-1,pageCount=-1;
@@ -162,7 +183,7 @@ public class OptionsBookstore {
     /**
      * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu Ebook
      */
-    private static Ebook addEbook(String str){
+    private static Ebook loadEbook(String str){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Rozmiar:(.*) DRM:(.*) Jakość:(.*) Format:(.*)";
         int ISBN=-1;
         double value=-1,size=-1;
@@ -183,7 +204,7 @@ public class OptionsBookstore {
     /**
      * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu AudioBook
      */
-    private static AudioBook addAudioBook(String str){
+    private static AudioBook loadAudioBook(String str){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Rozmiar:(.*) DRM:(.*) Jakość:(.*) Format:(.*) Czas trwania:(.*)h";
         AudioBook book=null;
         int ISBN=-1;
@@ -204,6 +225,21 @@ public class OptionsBookstore {
         return book=new AudioBook(ISBN, matcher.group(2),matcher.group(3),matcher.group(4), value, size, DRM,
                     matcher.group(8), matcher.group(9),duration);
         
+    }
+    /**
+     * Metoda statyczna zapisująca string w pliku tekstowym
+     * @param text
+     * @throws FileNotFoundException 
+     */
+    private static void saveBookInFileTxt(String text) throws FileNotFoundException, IOException{
+        FileWriter file = new FileWriter("ksiegarnia.txt", true);
+        BufferedWriter out = new BufferedWriter(file);
+        
+        out.write("\r\n");
+        out.write(text);
+        out.close();
+        file.close();
+ 
     }
     /**
      * Prywatna metoda sprawdzająca jakiego typu jest dana książka

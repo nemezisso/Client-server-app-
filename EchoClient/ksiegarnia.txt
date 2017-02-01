@@ -1,4 +1,4 @@
-﻿ISBN:987 Tytuł:Wiedzmin Autor:Sapkowski Wydawca:nova Cena:22.16zł Liczba stron:120 Waga:0.4kg Oprawa:miękka 
+﻿﻿ISBN:987 Tytuł:Wiedzmin Autor:Sapkowski Wydawca:nova Cena:22.16zł Liczba stron:120 Waga:0.4kg Oprawa:miękka 
 ISBN:484 Tytuł:Ogniem i mieczem Autor:Henryk Sienkiewicz Wydawca:PWN Cena:25.99zł Rozmiar:1024 DRM:false Jakość:bardzo dobra Format:pdf 
 ISBN:185 Tytuł:Rok 1984 Autor:George Orwell Wydawca:Muza Cena:15.88zł Liczba stron:288 Waga:0.4kg Oprawa:miękka 
 ISBN:789 Tytuł:Ojciec Chrzestny Autor:M Puzo Wydawca:Muza Cena:35.99zł Rozmiar:1024.0 DRM:true Jakość:bdb Format:mobi Czas trwania:2.51h 
@@ -7,4 +7,4 @@ ISBN:12 Tytuł:Bolek i Lolek Autor:Tosia Wydawca:Prolog Cena:9.99zł Rozmiar:102
 ISBN:55 Tytuł:W Pustyni i w puszczy Autor:Henryk Sienkiewicz Wydawca:PWN Cena:25.88zł Rozmiar:555.0 DRM:false Jakość:bardzo dobra Format:midi Czas trwania:3.58h 
 ISBN:147 Tytuł:Metro Autor:Dmitrij G Wydawca:Insignis Cena:25.99zł Liczba stron:592 Waga:1.25kg Oprawa:twarda 
 ISBN:555 Tytuł:Hobbit Autor:John Ronald Reuel Tolkien Wydawca:Amber Cena:13.5zł Rozmiar:2048.0 DRM:true Jakość:bardzo dobra Format:mobi 
-ISBN:1000 Tytuł:Gra o tron Autor:George R.R. Martin Wydawca:Zysk i S-ka Cena:33.99zł Liczba stron:999 Waga:3050.0kg Oprawa:miękka 
+ISBN:1000 Tytuł:Gra o tron Autor:George R.R. Martin Wydawca:Zysk i S-ka Cena:33.99zł Liczba stron:999 Waga:3050.0kg Oprawa:miękka

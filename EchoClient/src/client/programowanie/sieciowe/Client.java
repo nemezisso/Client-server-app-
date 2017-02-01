@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+/**
+ * Klasa klienta tekstowego
+ * 
+ * @author Bartek
+ */
 public class Client {
 
     public static void main(String[] args) {
@@ -20,7 +24,7 @@ public class Client {
             out = new PrintWriter(socket.getOutputStream());
             System.out.println("Nawiazano polaczenie z: "
                     + socket.getInetAddress());
-            ClientHandler rh=new ClientHandler(socket,in);
+
             String str;
             while (true) {
                 System.out.print("> ");
