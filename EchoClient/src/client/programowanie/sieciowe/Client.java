@@ -11,8 +11,9 @@ import java.net.Socket;
  * @author Bartek
  */
 public class Client {
-
+ 
     public static void main(String[] args) {
+        
         BufferedReader in = null;
         PrintWriter out = null;
         try {
@@ -24,7 +25,7 @@ public class Client {
             out = new PrintWriter(socket.getOutputStream());
             System.out.println("Nawiazano polaczenie z: "
                     + socket.getInetAddress());
-
+            
             String str;
             while (true) {
                 System.out.print("> ");
