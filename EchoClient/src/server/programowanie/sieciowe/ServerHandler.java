@@ -23,17 +23,22 @@ public class ServerHandler extends Thread{
      * Konstruktor klasy ServerHandler
      * Ustawia on pola:
      * @param socket 
-     * @param text tekst od klienta
      * @param out
      * Tworzy on także obiekt klasy OptionsBookstore
      * Ładuje do ArrayList listę obiektów(książek) za pomocą obiektu options i metody load
      */
-    public ServerHandler(Socket socket,String text,PrintWriter out){
+    public ServerHandler(Socket socket,PrintWriter out){
         this.socket=socket;
-        this.text=text;
         this.out=out;
         options=new OptionsBookstore();
         bookshop=options.load();
+    }
+    /**
+     * Metoda ustawiająca pole text 
+     * @param text 
+     */
+    public void setText(String text){
+        this.text=text;
     }
     /**
      * Przeciążona metoda run z klasy Thread
@@ -69,5 +74,6 @@ public class ServerHandler extends Thread{
         }
         else
            out.println("ERROR!");
+        
     }
 }

@@ -246,16 +246,13 @@ public class DisplayClient extends javax.swing.JFrame {
                 out.println("ERROR");
                 break;
         }
-        
-//        textArea.setText(null);
-//        textArea.append(DisplayClient.readText(in));
     }//GEN-LAST:event_addBookActionPerformed
 
     /**
      * Metoda pozwalająca wczytać z serwera String.
      * Zamienia znaki "@" na nowe linie
      * @param in
-     * @return zwraca String z liniami książek
+     * @return String z liniami książek
      */
     private static String readText(BufferedReader in){
         String str=null;

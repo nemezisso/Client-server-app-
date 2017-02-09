@@ -8,3 +8,4 @@ ISBN:55 Tytuł:W Pustyni i w puszczy Autor:Henryk Sienkiewicz Wydawca:PWN Cena:2
 ISBN:147 Tytuł:Metro Autor:Dmitrij G Wydawca:Insignis Cena:25.99zł Liczba stron:592 Waga:1.25kg Oprawa:twarda 
 ISBN:555 Tytuł:Hobbit Autor:John Ronald Reuel Tolkien Wydawca:Amber Cena:13.5zł Rozmiar:2048.0 DRM:true Jakość:bardzo dobra Format:mobi 
 ISBN:1000 Tytuł:Gra o tron Autor:George R.R. Martin Wydawca:Zysk i S-ka Cena:33.99zł Liczba stron:999 Waga:3050.0kg Oprawa:miękka
+ISBN:1000 Tytuł:sdo tron Autor:GedsR.R. Martin Wydawca:Zysd i S-ka Cena:323.29zł Liczba stron:9 Waga:350.0kg Oprawa:mi

@@ -19,18 +19,19 @@ import java.util.regex.Pattern;
  * @author Bartek
  */
 public class OptionsBookstore {
+        ArrayList<Integer> scanISBN=new ArrayList();
         ArrayList<ClassicBook> classic=new ArrayList();
         ArrayList<Ebook> ebook=new ArrayList();
         ArrayList<AudioBook> audio=new ArrayList();
+        ArrayList<Book> bookshop=new ArrayList();
     /**
      * Metoda load zwraca ArrayList<Book>
      * Wczytuje dane z pliku txt
      * Inicjuje i uzupełnia listy: classic, ebook, audio
      * 
-     * @return 
+     * @return ArrayList<Book>
      */
     public ArrayList<Book> load(){
-        ArrayList<Book> bookshop=new ArrayList();
        
         File file= new File("ksiegarnia.txt");
         Scanner in=null;
@@ -42,7 +43,7 @@ public class OptionsBookstore {
         while(in.hasNextLine()){
             String str;
             str=in.nextLine();
-            int count=OptionsBookstore.check(str);
+            int count=check(str);
 
           switch(count){
               case 1:
@@ -142,24 +143,45 @@ public class OptionsBookstore {
                 out.print(o+"@");
             out.println();
     }
-    public void addClassicBook(String text) throws FileNotFoundException, IOException{
+    /**
+     * Metoda zapisująca klasyczną książkę do pliku txt
+     * Dodaje również do ArrayList-Classic dodatkową pozycję
+     * @param text
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+    public void addClassicBook(String text) throws IOException{
         String str=loadClassicBook(text).toString();
         classic.add(loadClassicBook(text));
+        bookshop.add(loadClassicBook(str));
         saveBookInFileTxt(str);
         
     }
-    
+    /**
+     * Metoda zapisująca Ebook do pliku txt
+     * Dodaje również do ArrayList-ebook dodatkową pozycję
+     * @param text
+     * @throws IOException 
+     */
     public void addEbook(String text) throws IOException{
         String str=loadEbook(text).toString();
         ebook.add(loadEbook(text));
+        bookshop.add(loadClassicBook(str));
         saveBookInFileTxt(str);
     }
-    
+    /**
+     * Metoda zapisująca Audiobook do pliku txt
+     * Dodaje również do ArrayList-audio dodatkową pozycję
+     * @param text
+     * @throws IOException 
+     */
     public void addAudioBook(String text) throws IOException{
         String str=loadAudioBook(text).toString();
         audio.add(loadAudioBook(text));
+        bookshop.add(loadClassicBook(str));
         saveBookInFileTxt(str);
     }
+    
     /**
      * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu ClassicBook
      */
@@ -177,6 +199,7 @@ public class OptionsBookstore {
                 pageCount=Integer.parseInt(matcher.group(6));
                 weight=Double.parseDouble(matcher.group(7));
             }
+            
         return book=new ClassicBook(ISBN,matcher.group(2),matcher.group(3),matcher.group(4),value,pageCount,
                  weight, matcher.group(8));
     }
@@ -219,7 +242,7 @@ public class OptionsBookstore {
                 size=Double.parseDouble(matcher.group(6));
                 DRM=Boolean.parseBoolean(matcher.group(7));
                 duration=Double.parseDouble(matcher.group(10));
-                
+
             }
          
         return book=new AudioBook(ISBN, matcher.group(2),matcher.group(3),matcher.group(4), value, size, DRM,
@@ -248,7 +271,11 @@ public class OptionsBookstore {
      * Jeśli posiada tylko format jest to Ebook
      * Jeśli kryteria nie są spełnione metoda zwraca 0
      */
-    private static int check(String str){
+    private int check(String str){
+        
+        if(scanISBN(str)==false)
+            return 0;
+        
         String regexClassic="Liczba stron:(.*)Waga:";
         String regexAudioBook="Format:(.*) Czas trwania:";
         String regexEbook="Format:(.*) ";
@@ -263,7 +290,7 @@ public class OptionsBookstore {
                   if(matcher.find())
                         return 2;
             }
-           
+            
             pattern = Pattern.compile(regexEbook);
             matcher=pattern.matcher(str);
                 if(matcher.find())
@@ -271,5 +298,26 @@ public class OptionsBookstore {
             
             return 0;
           
+    }
+    
+    
+    private boolean scanISBN(String str){
+        int currentIssue=-1;
+        String regex="ISBN:(.*) Tytuł:";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        
+            if(matcher.find()){
+                currentIssue=Integer.parseInt(matcher.group(1));
+            }
+            
+        for(int i:scanISBN){
+            if(i==currentIssue)
+                return false;
+        }
+            
+        scanISBN.add(Integer.parseInt(matcher.group(1)));
+        return true;
+        
     }
 }

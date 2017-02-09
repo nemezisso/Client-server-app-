@@ -16,28 +16,46 @@ public abstract class Book implements Comparable<Book> {
     private double value;
     private int ISBNnumber;
     private String title, author, publisher;
-
+    /**
+     * Konstruktur rekursyjny
+     * Ustwia ISBN na 0000
+     */
     public Book() {
         this(0000);
     }
-
+    /**
+     * Konstruktur rekursyjny
+     * Ustwia tytuł na TITLE
+     */
     public Book(int ISBNnumber) {
         this(ISBNnumber, "TITLE");
     }
-
+    /**
+     * Konstruktur rekursyjny
+     * Ustwia autora na AUTHOR
+     */
     public Book(int ISBNnumber, String title) {
         this(ISBNnumber, title, "AUTHOR");
     }
-
+    /**
+     * Konstruktur rekursyjny
+     * Ustwia wydawce na PUBLISHER
+     */
     public Book(int ISBNnumber, String title, String author) {
         this(ISBNnumber, title, author, "PUBLISHER");
     }
-
+    /**
+     * Konstruktur rekursyjny
+     * Ustwia cene na 0.00
+     */
     public Book(int ISBNnumber, String title, String author,
             String publisher) {
-        this(ISBNnumber, title, author, publisher, 9.99);
+        this(ISBNnumber, title, author, publisher, 0.00);
     }
-    
+    /**
+     * Konstruktur rekursyjny z wszystkimi argumentami
+     * 
+     */
     public Book(int ISBNnumber, String title, String author,
             String publisher, double value) {
         this.ISBNnumber = ISBNnumber;
@@ -46,46 +64,77 @@ public abstract class Book implements Comparable<Book> {
         this.publisher = publisher;
         this.value = value;
     }
+    
     public String toString() {
         return "ISBN:" + ISBNnumber + " Tytuł:" + title + " Autor:" + author + " Wydawca:" + publisher + " Cena:" + value + "zł ";
     }
-
+    /**
+     * Getter value
+     * @return value
+     */
     public double getValue() {
         return value;
     }
-
+    /**
+     * Setter value
+     * @param value 
+     */
     public void setValue(double value) {
         this.value = value;
     }
-
+    /**
+     * Getter ISBN
+     * @return number ISBN
+     */
     public int getISBNnumber() {
         return ISBNnumber;
     }
-
+    /**
+     * Setter ISBN
+     * @param ISBNnumber 
+     */
     public void setISBNnumber(int ISBNnumber) {
         this.ISBNnumber = ISBNnumber;
     }
-
+    /**
+     * Getter title
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
-
+    /**
+     * Setter title
+     * @param title 
+     */
     public void setTitle(String title) {
         this.title = title;
     }
-
+    /**
+     * Getter authro
+     * @return author
+     */
     public String getAuthor() {
         return author;
     }
-
+    /**
+     * Setter author
+     * @param author 
+     */
     public void setAuthor(String author) {
         this.author = author;
     }
-
+    /**
+     * Getter publisher
+     * @return publisher
+     */
     public String getPublisher() {
         return publisher;
     }
-
+    /**
+     * Setter publisher
+     * @param publisher 
+     */
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }

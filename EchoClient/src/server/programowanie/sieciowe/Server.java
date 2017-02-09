@@ -2,12 +2,17 @@ package server.programowanie.sieciowe;
 
 import java.io.*;
 import java.net.*;
-
+/**
+ * Klasa serwera
+ * Odpowiedzialna za uruchomienie serwera, łączenie z odpowiadanie klientowi
+ * 
+ * @author Bartek
+ */
 public class Server {
 
     public static final int PORT = 7;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         
         ServerSocket serverSocket = new ServerSocket(PORT);
         System.out.println("Uruchomiono serwer: "
@@ -25,16 +30,22 @@ public class Server {
                                 socket.getOutputStream())), true);
                 System.out.println("Otwarto polaczenie: " + socket);
                 
+                    ServerHandler rh=new ServerHandler(socket,out);
+                    rh.start();
+                    
                 while (true) {
                     String text = in.readLine();
-                    ServerHandler rh=new ServerHandler(socket,text,out);
+                    rh.setText(text);
+                    
                     if (text.equals("#"))
                         break;
-                    else
-                        rh.start();
-                }
+
+                    rh.run();
+                    
+                } 
             } finally {
                 System.out.println("Zamykanie ...");
+                
                 try {
                     if (in != null) {
                         in.close();
