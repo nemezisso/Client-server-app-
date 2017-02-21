@@ -1,7 +1,5 @@
 package server.programowanie.sieciowe;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 /** 
  * Klasa abstrakcyjna Book. Implementuje interfejs Comparable<Book>
  * Klasa posiada pola wspólne dla wszystkich książek.
@@ -9,9 +7,6 @@ import java.util.Scanner;
  * @author Bartek
  */
 public abstract class Book implements Comparable<Book> {
-
-    private Scanner read;
-    private ArrayList books;
 
     private double value;
     private int ISBNnumber;
@@ -80,7 +75,10 @@ public abstract class Book implements Comparable<Book> {
      * @param value 
      */
     public void setValue(double value) {
-        this.value = value;
+        if(value>0.00)
+            this.value = value;
+        else
+            System.out.println("Incorrect data");
     }
     /**
      * Getter ISBN
@@ -94,7 +92,10 @@ public abstract class Book implements Comparable<Book> {
      * @param ISBNnumber 
      */
     public void setISBNnumber(int ISBNnumber) {
-        this.ISBNnumber = ISBNnumber;
+        if(ISBNnumber>0)
+            this.ISBNnumber = ISBNnumber;
+        else
+            System.out.println("Incorrect data");
     }
     /**
      * Getter title
@@ -108,7 +109,10 @@ public abstract class Book implements Comparable<Book> {
      * @param title 
      */
     public void setTitle(String title) {
-        this.title = title;
+        if(title.length()>0)
+            this.title = title;
+        else
+            System.out.println("Incorrect data");
     }
     /**
      * Getter authro
@@ -122,7 +126,10 @@ public abstract class Book implements Comparable<Book> {
      * @param author 
      */
     public void setAuthor(String author) {
-        this.author = author;
+        if(author.length()>0)
+            this.author = author;
+        else
+            System.out.println("Incorrect data");
     }
     /**
      * Getter publisher
@@ -136,7 +143,10 @@ public abstract class Book implements Comparable<Book> {
      * @param publisher 
      */
     public void setPublisher(String publisher) {
-        this.publisher = publisher;
+        if(publisher.length()>0)
+            this.publisher = publisher;
+        else
+            System.out.println("Incorrect data");
     }
     /** Metoda finalna, 
      * implementowana z interfejsu Comparable.
@@ -145,12 +155,7 @@ public abstract class Book implements Comparable<Book> {
      */
     @Override
     public final int compareTo(Book b) {
-        if(this.getISBNnumber()>b.getISBNnumber())
-            return 1;
-        else if(this.getISBNnumber()<b.getISBNnumber())
-            return -1;
-        else
-            return 0;
+        return this.getISBNnumber()-b.getISBNnumber();
     }
     /** Metoda finalna porównywania
      * Pozwala porównać Książki które rozszeżają klasę Book

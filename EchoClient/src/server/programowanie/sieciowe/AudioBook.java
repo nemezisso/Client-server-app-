@@ -12,7 +12,7 @@ public class AudioBook extends DigitalBook{
                 String publisher, double value,double size,boolean DRM,
                 String quality){
         super(ISBNnumber,title,author,publisher,value,size,DRM,quality);
-        this.format=format;
+        this.format="XYZ";
         this.duration=1.0;
     }
     public AudioBook(int ISBNnumber, String title, String author,
@@ -54,7 +54,10 @@ public class AudioBook extends DigitalBook{
     }
 
     public void setFormat(String format) {
-        this.format = format;
+        if(format.length()>0)
+            this.format = format;
+        else
+            System.out.println("Incorrect data");
     }
 
     public double getDuration() {
@@ -62,7 +65,10 @@ public class AudioBook extends DigitalBook{
     }
 
     public void setDuration(double duration) {
-        this.duration = duration;
+        if(duration>0.00)
+             this.duration = duration;
+        else
+            System.out.println("Incorrect data");
     }
 
     

@@ -41,7 +41,10 @@ public class Ebook extends DigitalBook {
         return format;
     }
     public void setFormat(String format) {
-        this.format = format;
+        if(format.length()>0)
+            this.format = format;
+        else
+            System.out.println("Incorrect data");
     }
 
     

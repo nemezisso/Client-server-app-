@@ -173,17 +173,8 @@ public class DisplayClient extends javax.swing.JFrame {
      */
     private void searchISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchISBNActionPerformed
         String text=null;
-        int numberISBN;
-        while(true){
-                try{
-                text=JOptionPane.showInputDialog(null,"Podaj numer ISBN: ","Wyszukaj książkę",
-                    JOptionPane.QUESTION_MESSAGE);
-                numberISBN=Integer.parseInt(text);
-                break;
-                }catch(NumberFormatException n){JOptionPane.showMessageDialog(null,
-                        "Proszę podać liczbę!","Błąd", JOptionPane.INFORMATION_MESSAGE);
-                }
-        }
+        String numberISBN;
+        numberISBN=GenerateBook.ISBNstring();
         
         out.println("search ISBN: "+numberISBN);
         out.flush();
@@ -255,13 +246,13 @@ public class DisplayClient extends javax.swing.JFrame {
      * @return String z liniami książek
      */
     private static String readText(BufferedReader in){
-        String str=null;
+        String readText=null;
         try {
-            str = in.readLine().replace("@","\n");
+            readText = in.readLine().replace("@","\n");
         } catch (IOException ex) {
             Logger.getLogger(DisplayClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return str;
+        return readText;
     }
     /**
      * @param args the command line arguments

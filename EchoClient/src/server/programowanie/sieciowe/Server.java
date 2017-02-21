@@ -30,17 +30,18 @@ public class Server {
                                 socket.getOutputStream())), true);
                 System.out.println("Otwarto polaczenie: " + socket);
                 
-                    ServerHandler rh=new ServerHandler(socket,out);
-                    rh.start();
-                    
+                ServerHandler rh=null;
+                String text=null; 
                 while (true) {
-                    String text = in.readLine();
-                    rh.setText(text);
+                    rh=new ServerHandler(socket,out);
+                    
+                    text = in.readLine();
                     
                     if (text.equals("#"))
                         break;
 
-                    rh.run();
+                    rh.setText(text);
+                    rh.start();
                     
                 } 
             } finally {

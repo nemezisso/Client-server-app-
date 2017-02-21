@@ -13,15 +13,15 @@ public class ClassicBook extends Book{
     public ClassicBook(int ISBNnumber, String title, String author,
                 String publisher, double value){
         super(ISBNnumber,title,author,publisher,value);
-        this.pageCount=00;
-        this.weight=00;
+        this.pageCount=1;
+        this.weight=1;
         this.binding="BINDING";
     }
     public ClassicBook(int ISBNnumber, String title, String author,
                 String publisher, double value,int pageCount){
         super(ISBNnumber,title,author,publisher,value);
         this.pageCount=pageCount;
-        this.weight=00;
+        this.weight=1;
         this.binding="BINDING";
     }
     public ClassicBook(int ISBNnumber, String title, String author,
@@ -59,19 +59,28 @@ public class ClassicBook extends Book{
         return binding;
     }
     public void setBinding(String binding) {
-        this.binding = binding;
+        if(binding.length()>0)
+            this.binding = binding;
+        else
+            System.out.println("Incorrect data");
     }
     public int getPageCount() {
         return pageCount;
     }
     public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+        if(pageCount>0)
+            this.pageCount = pageCount;
+        else
+            System.out.println("Incorrect data");
     }
     public double getWeight() {
         return weight;
     }
     public void setWeight(double weight) {
-        this.weight = weight;
+        if(weight>0.00)
+            this.weight = weight;
+        else
+            System.out.println("Incorrect data");
     }   
 
 }

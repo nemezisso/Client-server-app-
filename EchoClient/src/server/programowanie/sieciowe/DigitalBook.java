@@ -47,13 +47,19 @@ public abstract class DigitalBook extends Book{
         return quality;
     }
     public void setQuality(String quality) {
-        this.quality = quality;
+        if(quality.length()>0)
+            this.quality = quality;
+        else
+            System.out.println("Incorrect data");
     }
     public double getSize() {
         return size;
     }
     public void setSize(double size) {
-        this.size = size;
+        if(size>0.00)
+            this.size = size;
+        else
+            System.out.println("Incorrect data");
     }
     public boolean isDRM() {
         return DRM;

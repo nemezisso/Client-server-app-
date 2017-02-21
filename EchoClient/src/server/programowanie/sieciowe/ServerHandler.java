@@ -47,10 +47,13 @@ public class ServerHandler extends Thread{
     public void run(){
         if(text.startsWith("show:"))
             options.showReply(out, text, bookshop);
+        
         else if(text.startsWith("search ISBN:"))
             OptionsBookstore.searchBooksByISBN(text, bookshop, out);
+        
         else if(text.equals("sort"))
             OptionsBookstore.sortByISBN(bookshop, out);
+        
         else if(text.startsWith("add classic: ")){
            try {
                         options.addClassicBook(text.substring(13));
@@ -58,6 +61,7 @@ public class ServerHandler extends Thread{
              Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
            }
         }
+        
         else if(text.startsWith("add ebook: ")){
                    try {
                         options.addEbook(text.substring(11));
@@ -65,6 +69,7 @@ public class ServerHandler extends Thread{
                     Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                    }
         }
+        
         else if(text.startsWith("add audio: ")){
                    try {
                         options.addAudioBook(text.substring(11));
@@ -72,8 +77,8 @@ public class ServerHandler extends Thread{
                     Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                    }
         }
+        
         else
            out.println("ERROR!");
-        
     }
 }
