@@ -1,9 +1,5 @@
 package server.programowanie.sieciowe;
-/**
- * Klasa abstakcyjna dziedzicząca po klasie Book
- * Są tu dodatkowe pola, należące tylko do książek cyfrowych.
- * @author Bartek
- */
+
 public abstract class DigitalBook extends Book{
     private String quality;
     private double size;
