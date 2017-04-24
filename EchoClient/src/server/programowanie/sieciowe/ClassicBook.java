@@ -1,10 +1,5 @@
 package server.programowanie.sieciowe;
-/**
- * Klasa ClassicBook dziedziczy po klasie Book
- * Posiada pola, które mogą posiadać tylko książki papierowe
- * 
- * @author Bartek
- */
+
 public class ClassicBook extends Book{
     private String binding;
     private int pageCount;
@@ -31,17 +26,7 @@ public class ClassicBook extends Book{
         this.weight=weight;
         this.binding="BINDING";
     }
-    /**
-     * Konstruktor klasy ClassicBook
-     * @param ISBNnumber numer ISBN książki
-     * @param title tytuł książki
-     * @param author autor książki
-     * @param publisher wydawca książki
-     * @param value cena książki
-     * @param pageCount ilość stron książki
-     * @param weight waga książki (w kilogramach)
-     * @param binding oprawa książki (twarda, miękka)
-     */
+
     public ClassicBook(int ISBNnumber, String title, String author,
                 String publisher, double value,int pageCount,double weight,String binding){
         super(ISBNnumber,title,author,publisher,value);
