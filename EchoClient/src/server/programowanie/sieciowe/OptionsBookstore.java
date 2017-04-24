@@ -14,23 +14,14 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Klasa wykonująca operacje i polecenia od klienta
- * @author Bartek
- */
+
 public class OptionsBookstore {
         ArrayList<Integer> scanISBN=new ArrayList();
         ArrayList<ClassicBook> classic=new ArrayList();
         ArrayList<Ebook> ebook=new ArrayList();
         ArrayList<AudioBook> audio=new ArrayList();
         ArrayList<Book> bookshop=new ArrayList();
-    /**
-     * Metoda load zwraca ArrayList<Book>
-     * Wczytuje dane z pliku txt
-     * Inicjuje i uzupełnia listy: classic, ebook, audio
-     * 
-     * @return ArrayList<Book>
-     */
+
     public ArrayList<Book> load(){
        
         File file= new File("ksiegarnia.txt");
@@ -66,13 +57,7 @@ public class OptionsBookstore {
             in.close();
             return bookshop;
     }
-    /**
-     * Klient po wprowadzeniu textu- show: 
-     * -all
-     * -classic
-     * -digital
-     * dostaje w odpowiedzi listę obiektów z książkami
-     */
+
     public void showReply(PrintWriter out,String text,ArrayList<Book> bookshop){
         String textForClient="";
         if(text.startsWith("all", 6)){
@@ -106,11 +91,7 @@ public class OptionsBookstore {
         else
         out.println("ERROR!");
     }
-    /**
-     * Metoda do wyszukiwania ksiązki po numerze ISBN:
-     * Książążka zwraca obiekt książki jeśli książka znajduje się w bazie
-     * Jeśli książki nie znaleziono w bazie wysyła do klienta odpowiedz o braku książki
-     */
+
     public static boolean searchBooksByISBN(String numberISBN, ArrayList<Book> bookshop,PrintWriter out){
         String regex="ISBN:(.*) Tytuł:";
         numberISBN=numberISBN.substring(13);
@@ -128,25 +109,14 @@ public class OptionsBookstore {
         out.println("Not found!");
         return false;
     }
-    /**
-     * Metoda sortowania książki po numerze ISBN
-     * Sortuje i wyświetla posortowaną listę wszystkich książek
-     * @param bookshop
-     * @param out 
-     */
+
     public static void sortByISBN(ArrayList<Book> bookshop,PrintWriter out){
         Collections.sort(bookshop);
             for(Object o:bookshop)
                 out.print(o+"@");
             out.println();
     }
-    /**
-     * Metoda zapisująca klasyczną książkę do pliku txt
-     * Dodaje również do ArrayList-Classic dodatkową pozycję
-     * @param bookString
-     * @throws FileNotFoundException
-     * @throws IOException 
-     */
+
     public void addClassicBook(String bookString) throws IOException{
         String book=loadClassicBook(bookString).toString();
         classic.add(loadClassicBook(bookString));
@@ -154,24 +124,14 @@ public class OptionsBookstore {
         saveBookInFileTxt(book);
         
     }
-    /**
-     * Metoda zapisująca Ebook do pliku txt
-     * Dodaje również do ArrayList-ebook dodatkową pozycję
-     * @param bookString
-     * @throws IOException 
-     */
+
     public void addEbook(String bookString) throws IOException{
         String book=loadEbook(bookString).toString();
         ebook.add(loadEbook(bookString));
         bookshop.add(loadClassicBook(book));
         saveBookInFileTxt(book);
     }
-    /**
-     * Metoda zapisująca Audiobook do pliku txt
-     * Dodaje również do ArrayList-audio dodatkową pozycję
-     * @param bookString
-     * @throws IOException 
-     */
+
     public void addAudioBook(String bookString) throws IOException{
         String book=loadAudioBook(bookString).toString();
         audio.add(loadAudioBook(bookString));
@@ -179,9 +139,6 @@ public class OptionsBookstore {
         saveBookInFileTxt(book);
     }
     
-    /**
-     * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu ClassicBook
-     */
     private static ClassicBook loadClassicBook(String bookString){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Liczba stron:(.*) Waga:(.*)kg Oprawa:(.*)";
 
@@ -200,9 +157,7 @@ public class OptionsBookstore {
         return new ClassicBook(ISBN,matcher.group(2),matcher.group(3),matcher.group(4),value,pageCount,
                  weight, matcher.group(8));
     }
-    /**
-     * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu Ebook
-     */
+        
     private static Ebook loadEbook(String bookString){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Rozmiar:(.*) DRM:(.*) Jakość:(.*) Format:(.*)";
         int ISBN=-1;
@@ -220,9 +175,7 @@ public class OptionsBookstore {
         return new Ebook(ISBN,matcher.group(2),matcher.group(3),matcher.group(4), value, size, DRM,
                     matcher.group(8), matcher.group(9));
     }
-    /**
-     * Prywatna metoda dzięki której wczytany tekst z pliku txt zostaje zmieniony na obiekt typu AudioBook
-     */
+ 
     private static AudioBook loadAudioBook(String bookString){
         String regex="ISBN:(.*) Tytuł:(.*) Autor:(.*) Wydawca:(.*) Cena:(.*)zł Rozmiar:(.*) DRM:(.*) Jakość:(.*) Format:(.*) Czas trwania:(.*)h";
 
@@ -245,11 +198,7 @@ public class OptionsBookstore {
                     matcher.group(8), matcher.group(9),duration);
         
     }
-    /**
-     * Metoda statyczna zapisująca string w pliku tekstowym
-     * @param bookString
-     * @throws FileNotFoundException 
-     */
+
     private static void saveBookInFileTxt(String bookString) throws FileNotFoundException, IOException{
         FileWriter file = new FileWriter("ksiegarnia.txt", true);
         BufferedWriter out = new BufferedWriter(file);
@@ -260,13 +209,7 @@ public class OptionsBookstore {
         file.close();
  
     }
-    /**
-     * Prywatna metoda sprawdzająca jakiego typu jest dana książka
-     * Jeśli posiada liczbę stron- jest to książka klasyczna
-     * Jeśli posiada format i czas trwania jest to AudioBook
-     * Jeśli posiada tylko format jest to Ebook
-     * Jeśli kryteria nie są spełnione metoda zwraca 0
-     */
+
     private int check(String bookString){
         
         if(scanISBN(bookString)==false)
