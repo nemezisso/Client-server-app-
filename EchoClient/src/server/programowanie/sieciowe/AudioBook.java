@@ -1,9 +1,5 @@
 package server.programowanie.sieciowe;
-/**
- * Klasa AudioBooka, dziedziczy po klasie DigitalBook
- * rozszerza ją o dodatkowe pola 
- * @author Bartek
- */
+
 public class AudioBook extends DigitalBook{
     private String format;
     private double duration;
@@ -22,19 +18,7 @@ public class AudioBook extends DigitalBook{
         this.format=format;
         this.duration=1.0;
     }
-    /**
-     * Konstruktor klasy AudioBook
-     * @param ISBNnumber numer ISBN książki
-     * @param title tytuł książki
-     * @param author autor książki
-     * @param publisher wydawca książki
-     * @param value cena książki
-     * @param size rozmiar w kb książki
-     * @param DRM zabezpieczenie w postaci DRM książki (true/false)
-     * @param quality jakość książki
-     * @param format format cyfrowy książki (audio,mp3 itd.)
-     * @param duration czas trwania książki (w godzinach)
-     */
+
     public AudioBook(int ISBNnumber, String title, String author,
                 String publisher, double value,double size,boolean DRM,
                 String quality, String format, double duration){
