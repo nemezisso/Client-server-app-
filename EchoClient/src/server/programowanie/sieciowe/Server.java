@@ -2,12 +2,7 @@ package server.programowanie.sieciowe;
 
 import java.io.*;
 import java.net.*;
-/**
- * Klasa serwera
- * Odpowiedzialna za uruchomienie serwera, łączenie z odpowiadanie klientowi
- * 
- * @author Bartek
- */
+
 public class Server {
 
     public static final int PORT = 7;
