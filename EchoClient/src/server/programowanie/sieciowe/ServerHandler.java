@@ -7,43 +7,24 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Klasa ServerHandler
- * Jest to klasa rozszerzająca klasę Thread
- * Dzięki niej może zostać utworzony wątek w klasie Server
- * @author Bartek
- */
 public class ServerHandler extends Thread{
     Socket socket;
     String text;
     PrintWriter out;
     ArrayList<Book> bookshop;
     OptionsBookstore options;
-    /**
-     * Konstruktor klasy ServerHandler
-     * Ustawia on pola:
-     * @param socket 
-     * @param out
-     * Tworzy on także obiekt klasy OptionsBookstore
-     * Ładuje do ArrayList listę obiektów(książek) za pomocą obiektu options i metody load
-     */
+
     public ServerHandler(Socket socket,PrintWriter out){
         this.socket=socket;
         this.out=out;
         options=new OptionsBookstore();
         bookshop=options.load();
     }
-    /**
-     * Metoda ustawiająca pole text 
-     * @param text 
-     */
+
     public void setText(String text){
         this.text=text;
     }
-    /**
-     * Przeciążona metoda run z klasy Thread
-     * Tutaj tworzy się wątek i wykonuje sekwencja wysyłania informacji do klienta
-     */
+
     public void run(){
         if(text.startsWith("show:"))
             options.showReply(out, text, bookshop);
